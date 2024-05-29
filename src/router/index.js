@@ -1,19 +1,38 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import NavigationView from '../views/NavigationView.vue'
+import SearchView from '../views/SearchView.vue'
+import LocationDetailsView from '../views/LocationDetailsView.vue'
+import LocationDetails from '../components/LocationDetails.vue'
+import NavigationForm from '../components/NavigationForm.vue'; // Import the NavigationForm component
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'SearchView',
+    component: SearchView,
+    props: route => ({ locationName: route.params.locationName }) // Receive locationName parameter
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/navigation',
+    name: 'navigation',
+    component: NavigationView
+  },
+  {
+    path: '/navigation-form', // Define route for NavigationForm
+    name: 'NavigationForm',
+    component: NavigationForm
+  },
+  {
+    path: '/location-details/:id', // Define a new route for location details view
+    name: 'LocationDetailsView',
+    component: LocationDetailsView,
+    props: true
+  },
+  {
+    path: '/location/:id',
+    name: 'LocationDetails',
+    component: LocationDetails,
+    props: true
   }
 ]
 

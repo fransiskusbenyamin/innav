@@ -11,35 +11,36 @@
   </template>
   
   <script>
-  import { locations } from '../data/locations';
-  
-  export default {
-    name: 'LocationDetailsView',
-    data() {
-      return {
-        location: null
-      };
+import axios from 'axios';
+import { API_BASE_URL } from '../config'; // Import the base URL
+
+export default {
+  name: 'LocationDetailsView',
+  data() {
+    return {
+      location: null
+    };
+  },
+  created() {
+    const locationId = parseInt(this.$route.params.id);
+    this.fetchLocation(locationId);
+  },
+  methods: {
+    async fetchLocation(locationId) {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/user/node/9/${locationId}`);
+        this.location = response.data.data;
+      } catch (error) {
+        console.error('Error fetching location:', error);
+      }
     },
-    created() {
-      const locationId = parseInt(this.$route.params.id);
-      this.location = locations.find(location => location.id === locationId);
-    },
-    methods: {
-      navigateToLocation() {
-        if (this.location) {
-          // Navigate to NavigationForm route with location name pre-filled in destination input
-          this.$router.push({ name: 'NavigationForm', query: { destination: this.location.name } });
-        }
+    navigateToLocation() {
+      if (this.location) {
+        // Navigate to NavigationForm route with location name pre-filled in destination input
+        this.$router.push({ name: 'NavigationForm', query: { destination: this.location.name } });
       }
     }
-  };
-  </script>
-
-  <style scoped>
-  .location-image {
-    width: 50%;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto; /* Optional: center the image */
   }
-  </style>
+};
+</script>
+  ../data/locations

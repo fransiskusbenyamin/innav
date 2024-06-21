@@ -7,7 +7,9 @@
       <div v-for="location in filteredLocations" :key="location.id" class="location-card">
         <img :src="location.imageUrl" :alt="location.name" class="location-image" />
         <h3>{{ location.name }}</h3>
+        <img :src="location.photo" alt="Location photo" class="location-photo" />
         <p>{{ location.description }}</p>
+        <!-- <p>{{ location.photo }}</p> -->
         <router-link :to="{ name: 'LocationDetailsView', params: { id: location.id } }">
           <button>View Location Page</button>
         </router-link>
@@ -17,18 +19,37 @@
 </template>
 
 <script>
+<<<<<<< Updated upstream
 import { locations } from '../data/locations';
+=======
+import axios from 'axios';
+import { API_BASE_URL } from '../config'; // Import the base URL
+>>>>>>> Stashed changes
 
 export default {
   name: 'SearchView',
   data() {
     return {
       searchQuery: '',
-      locations: locations,
-      filteredLocations: locations // Initially display all locations
+      locations: [], // Initialize as an empty array
+      filteredLocations: [] // Initially display no locations until data is fetched
     };
   },
+  created() {
+    // Lifecycle hook to fetch data when component is created
+    this.fetchLocations();
+  },
   methods: {
+    async fetchLocations() {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/user/node/9`);
+        console.log('Locations:', response.data.data);
+        this.locations = response.data.data;
+        this.filteredLocations = response.data.data;
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+      }
+    },
     filterLocations() {
       this.filteredLocations = this.locations.filter(location =>
         location.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -37,6 +58,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 .search-bar {
@@ -53,6 +75,7 @@ export default {
   background-color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
+<<<<<<< Updated upstream
   text-align: center;
 }
 
@@ -65,6 +88,16 @@ export default {
 
 .location-card h3 {
   margin-top: 10px;
+=======
+  text-align: center; /* Center-align the contents */
+}
+
+.location-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+>>>>>>> Stashed changes
 }
 
 .location-card button {

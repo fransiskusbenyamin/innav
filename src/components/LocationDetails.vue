@@ -1,19 +1,20 @@
 <!-- src/components/ShopDetails.vue -->
 <template>
-    <div v-if="location">
-      <h2>{{ location.name }}</h2>
-      <p>{{ location.description }}</p>
-      <!-- Add more details display here -->
-    </div>
-    <div v-else>
-      <p>Shop details not found.</p>
-    </div>
-  </template>
-  
-  <script>
-  import { locations } from '../data/locations'; // Import the locations array
+  <div v-if="location">
+    <h2>{{ location.name }}</h2>
+    <p>{{ location.description }}</p>
+    <img :src="location.imageUrl" :alt="location.name" />
+    <!-- Add more details display here -->
+  </div>
+  <div v-else>
+    <p>Shop details not found.</p>
+  </div>
+</template>
 
-  export default {
+<script>
+import { locations } from '../data/locations'; // Import the locations array
+
+export default {
   props: {
     locationId: {
       type: Number,
@@ -27,8 +28,7 @@
   }
 };
 </script>
-  
-  <style scoped>
-  /* Add styles if needed */
-  </style>
-  ../data/locations
+
+<style scoped>
+/* Add styles if needed */
+</style>

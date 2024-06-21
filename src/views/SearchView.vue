@@ -1,4 +1,3 @@
-<!-- src/views/SearchView.vue -->
 <template>
   <div>
     <div class="search-bar">
@@ -6,6 +5,7 @@
     </div>
     <div class="location-grid">
       <div v-for="location in filteredLocations" :key="location.id" class="location-card">
+        <img :src="location.imageUrl" :alt="location.name" class="location-image" />
         <h3>{{ location.name }}</h3>
         <p>{{ location.description }}</p>
         <router-link :to="{ name: 'LocationDetailsView', params: { id: location.id } }">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { locations } from '../data/locations'; // Import the locations array
+import { locations } from '../data/locations';
 
 export default {
   name: 'SearchView',
@@ -53,6 +53,18 @@ export default {
   background-color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
+  text-align: center;
+}
+
+.location-card img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.location-card h3 {
+  margin-top: 10px;
 }
 
 .location-card button {
@@ -69,4 +81,3 @@ export default {
   background-color: #0056b3;
 }
 </style>
-../data/locations

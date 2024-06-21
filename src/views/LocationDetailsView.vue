@@ -1,6 +1,7 @@
 <template>
     <div v-if="location">
       <h2>{{ location.name }}</h2>
+      <img :src="location.imageUrl" :alt="location.name" class="location-image" />
       <p>{{ location.description }}</p>
       <button @click="navigateToLocation">Navigate Here</button>
     </div>
@@ -33,4 +34,12 @@
     }
   };
   </script>
-  ../data/locations
+
+  <style scoped>
+  .location-image {
+    width: 50%;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto; /* Optional: center the image */
+  }
+  </style>

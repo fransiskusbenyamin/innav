@@ -19,12 +19,8 @@
 </template>
 
 <script>
-<<<<<<< Updated upstream
-import { locations } from '../data/locations';
-=======
 import axios from 'axios';
 import { API_BASE_URL } from '../config'; // Import the base URL
->>>>>>> Stashed changes
 
 export default {
   name: 'SearchView',
@@ -75,7 +71,6 @@ export default {
   background-color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
-<<<<<<< Updated upstream
   text-align: center;
 }
 
@@ -88,16 +83,6 @@ export default {
 
 .location-card h3 {
   margin-top: 10px;
-=======
-  text-align: center; /* Center-align the contents */
-}
-
-.location-photo {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 10px;
->>>>>>> Stashed changes
 }
 
 .location-card button {

@@ -5,7 +5,7 @@
     </div>
     <div class="location-grid">
       <div v-for="location in filteredLocations" :key="location.id" class="location-card">
-        <img :src="location.imageUrl" :alt="location.name" class="location-image" />
+        <!-- <img :src="location.imageUrl" :alt="location.name" class="location-image" /> -->
         <h3>{{ location.name }}</h3>
         <img :src="location.photo" alt="Location photo" class="location-photo" />
         <p>{{ location.description }}</p>

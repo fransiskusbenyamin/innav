@@ -1,7 +1,7 @@
 <template>
     <div v-if="location">
       <h2>{{ location.name }}</h2>
-      <img :src="location.imageUrl" :alt="location.name" class="location-image" />
+      <img :src="location.photo" :alt="location.name" class="location-image" />
       <p>{{ location.description }}</p>
       <button @click="navigateToLocation">Navigate Here</button>
     </div>

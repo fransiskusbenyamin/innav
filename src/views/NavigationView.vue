@@ -1,16 +1,30 @@
-<!-- src/views/NavigationView.vue -->
 <template>
   <div>
-    <NavigationForm />
+    <NavigationForm v-if="showForm" @navigation-submitted="handleNavigationSubmitted" />
+    <NavigationInstructions v-else :navigationSteps="navigationSteps" />
   </div>
 </template>
 
 <script>
 import NavigationForm from '../components/NavigationForm.vue';
+import NavigationInstructions from '../components/NavigationInstructions.vue';
 
 export default {
   components: {
-    NavigationForm
+    NavigationForm,
+    NavigationInstructions
+  },
+  data() {
+    return {
+      showForm: true,
+      navigationSteps: []
+    };
+  },
+  methods: {
+    handleNavigationSubmitted(steps) {
+      this.navigationSteps = steps;
+      this.showForm = false;
+    }
   }
 };
 </script>

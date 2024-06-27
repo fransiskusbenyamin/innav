@@ -1,34 +1,26 @@
-<!-- src/components/ShopDetails.vue -->
 <template>
-  <div v-if="location">
-    <h2>{{ location.name }}</h2>
+  <div>
+    <h1>{{ location.name }}</h1>
     <p>{{ location.description }}</p>
-    <img :src="location.imageUrl" :alt="location.name" />
-    <!-- Add more details display here -->
-  </div>
-  <div v-else>
-    <p>Shop details not found.</p>
+    <NavigationForm :destinationId="location.id" />
   </div>
 </template>
 
 <script>
-import { locations } from '../data/locations'; // Import the locations array
+import NavigationForm from '@/components/NavigationForm.vue';
 
 export default {
-  props: {
-    locationId: {
-      type: Number,
-      required: true
-    }
+  components: {
+    NavigationForm
   },
-  computed: {
-    location() {
-      return locations.find(location => location.id === this.locationId);
-    }
+  data() {
+    return {
+      location: {
+        id: 'some-location-id', // Replace this with actual location data
+        name: 'Some Location',
+        description: 'Description of the location'
+      }
+    };
   }
 };
 </script>
-
-<style scoped>
-/* Add styles if needed */
-</style>

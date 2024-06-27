@@ -1,4 +1,3 @@
-<!-- src/components/NavigationInstructions.vue -->
 <template>
   <div>
     <h2>Navigation Instructions</h2>
@@ -13,14 +12,12 @@
 </template>
 
 <script>
-import dummyNavigation from '../data/dummyNavigation';
 import RatingForm from './RatingForm.vue';
 
 export default {
-  props: ['destination'],
+  props: ['navigationSteps'],
   data() {
     return {
-      navigationSteps: dummyNavigation,
       currentStep: 1
     };
   },

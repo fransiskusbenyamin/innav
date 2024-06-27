@@ -37,7 +37,7 @@ export default {
     navigateToLocation() {
       if (this.location) {
         // Navigate to NavigationForm route with location name pre-filled in destination input
-        this.$router.push({ name: 'NavigationForm', query: { destination: this.location.name } });
+        this.$router.push({ name: 'NavigationForm', query: { destination: this.location.locationId } });
       }
     }
   }

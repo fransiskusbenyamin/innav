@@ -18,7 +18,7 @@ const routes = [
     component: NavigationView
   },
   {
-    path: '/navigation-form', // Define route for NavigationForm
+    path: '/navigation-form/:id', // Define route for NavigationForm
     name: 'NavigationForm',
     component: NavigationForm
   },

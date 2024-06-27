@@ -81,7 +81,8 @@ export default {
       axios.post(`${API_BASE_URL}/user/path`, payload)
         .then(response => {
           console.log('Navigation data sent:', response.data);
-          this.$emit('navigation-submitted', response.data.steps);
+          // Emit event to parent component with navigation steps
+          this.$emit('navigation-submitted', response.data);
         })
         .catch(error => {
           console.error('Error sending navigation data:', error);

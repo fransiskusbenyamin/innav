@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavigationForm v-if="showForm" @navigation-submitted="handleNavigationSubmitted" />
-    <NavigationInstructions v-else :navigationSteps="navigationSteps" />
+    <NavigationInstructions v-else :steps="navigationSteps" />
   </div>
 </template>
 
@@ -17,13 +17,15 @@ export default {
   data() {
     return {
       showForm: true,
-      navigationSteps: []
+      navigationSteps: [] // Initialize navigationSteps data
     };
   },
   methods: {
     handleNavigationSubmitted(steps) {
-      this.navigationSteps = steps;
-      this.showForm = false;
+      if (steps) {
+        this.showForm = false;
+        this.navigationSteps = steps.data; // Assuming steps.data contains the array of steps
+      }
     }
   }
 };

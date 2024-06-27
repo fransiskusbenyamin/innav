@@ -2,12 +2,12 @@
   <div>
     <h2>Navigation Instructions</h2>
     <ul>
-      <li v-for="step in navigationSteps" :key="step.step" :class="{ active: step.step === currentStep }">
-        Step {{ step.step }}: {{ step.instruction }}
+      <li v-for="(step, index) in steps.path" :key="index" :class="{ active: index + 1 === currentStep }">
+        Step {{ index + 1 }}: Walk towards {{ step_names[index] }}
       </li>
     </ul>
-    <button @click="nextStep" :disabled="currentStep > navigationSteps.length">Next Step</button>
-    <RatingForm v-if="currentStep > navigationSteps.length" />
+    <button @click="nextStep" :disabled="currentStep > steps.path.length">Next Step</button>
+    <RatingForm v-if="currentStep > steps.path.length" />
   </div>
 </template>
 
@@ -15,10 +15,11 @@
 import RatingForm from './RatingForm.vue';
 
 export default {
-  props: ['navigationSteps'],
+  props: ['steps'],
   data() {
     return {
-      currentStep: 1
+      currentStep: 1,
+      step_names: [] // Initialize an array to store step names
     };
   },
   components: {
@@ -26,9 +27,22 @@ export default {
   },
   methods: {
     nextStep() {
-      if (this.currentStep <= this.navigationSteps.length) {
+      if (this.currentStep <= this.steps.path.length) {
         this.currentStep += 1;
       }
+    }
+  },
+  mounted() {
+    // Extracting step names from props on mount
+    this.step_names = this.steps.path_names;
+  },
+  watch: {
+    steps: {
+      handler(newSteps) {
+        // Update step names when steps prop changes
+        this.step_names = newSteps.path_names;
+      },
+      immediate: true // Log immediately on component mount
     }
   }
 };

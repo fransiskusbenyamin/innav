@@ -8,13 +8,14 @@
         id="currentLocation" 
         required 
         @input="filterLocations"
+        @focus="showSuggestions = true"
         autocomplete="off"
       />
-      <ul v-if="filteredLocations.length > 0" class="suggestions">
+      <ul v-if="showSuggestions && filteredLocations.length > 0" class="suggestions">
         <li 
           v-for="location in filteredLocations" 
           :key="location.id" 
-          @click="selectLocation(location.name,location.id)"
+          @click="selectLocation(location.name, location.id)"
         >
           {{ location.name }}
         </li>
@@ -41,7 +42,8 @@ export default {
       fromId: '',
       locationId: parseInt(this.$route.params.id),
       locations: [],
-      filteredLocations: []
+      filteredLocations: [],
+      showSuggestions: false // Initialize to false to hide suggestions by default
     };
   },
   created() {
@@ -53,7 +55,6 @@ export default {
         const response = await axios.get(`${API_BASE_URL}/user/node/9`);
         console.log('Locations:', response.data.data);
         this.locations = response.data.data;
-        this.filteredLocations = response.data.data;
       } catch (error) {
         console.error('Error fetching locations:', error);
       }
@@ -71,6 +72,7 @@ export default {
       this.currentLocation = name;
       this.fromId = id;
       this.filteredLocations = [];
+      this.showSuggestions = false; // Hide suggestions when a location is selected
     },
     submitNavigation() {
       const payload = {
@@ -81,8 +83,7 @@ export default {
       axios.post(`${API_BASE_URL}/user/path`, payload)
         .then(response => {
           console.log('Navigation data sent:', response.data);
-          // Emit event to parent component with navigation steps
-          this.$emit('navigation-submitted', response.data);
+          this.$emit('navigation-submitted', response.data); // Emit the navigation data to parent
         })
         .catch(error => {
           console.error('Error sending navigation data:', error);

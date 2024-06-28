@@ -3,7 +3,10 @@
     <h2>Navigation Instructions</h2>
     <ul>
       <li v-for="(step, index) in steps.path" :key="index" :class="{ active: index + 1 === currentStep }">
-        Step {{ index + 1 }}: Walk towards {{ step_names[index] }}
+        Step {{ index + 1 }}: 
+        <span v-if="step_names[index].toLowerCase().includes('lift')">Go To</span>
+        <span v-else>Walk towards</span>
+        {{ step_names[index] }}
       </li>
     </ul>
     <button @click="nextStep" :disabled="currentStep > steps.path.length">Next Step</button>
